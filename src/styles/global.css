@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Adamina', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-sans: 'Momo Trust Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 @font-face {
     font-family: 'Adamina';
@@ -13,8 +13,8 @@
 }
 @font-face {
     font-family: 'Momo Trust Sans';
-    src: url('MomoTrustSans-Bold.woff2') format('woff2'),
-        url('MomoTrustSans-Bold.woff') format('woff');
+    src: url('../assets/fonts/MomoTrustSans-Bold.woff2') format('woff2'),
+        url('../assets/fonts/MomoTrustSans-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -22,8 +22,8 @@
 
 @font-face {
     font-family: 'Momo Trust Sans';
-    src: url('MomoTrustSans-Regular.woff2') format('woff2'),
-        url('MomoTrustSans-Regular.woff') format('woff');
+    src: url('../assets/fonts/MomoTrustSans-Regular.woff2') format('woff2'),
+        url('../assets/fonts/MomoTrustSans-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -31,9 +31,17 @@
 
 @font-face {
     font-family: 'Momo Trust Sans';
-    src: url('MomoTrustSans-Light.woff2') format('woff2'),
-        url('MomoTrustSans-Light.woff') format('woff');
+    src: url('../assets/fonts/MomoTrustSans-Light.woff2') format('woff2'),
+        url('../assets/fonts/MomoTrustSans-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
+}
+body {
+  background-color: #ED996B;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1rem;
 }
