@@ -1,12 +1,41 @@
 ---
-import astroLogo from '../assets/astro.svg';
-import background from '../assets/background.svg';
----
+import Seccion from "./Seccion.astro";
 
-<div id="container">
-	<main>
-		<div>
-			<h1 class="text-6xl">Portfolio Laura</h1>
-		</div>
-	</main>
-</div>
+// Hero.astro
+// Asegurate de tener las imágenes en /public:
+// /img-left.png, /img-center.png, /img-right.png
+---
+<section class="w-full bg-[#ED996B] text-white font-sans">
+  <div class="max-w-7xl mx-auto px-8 md:px-16 py-16">
+    <!-- Título (mayúsculas + tracking) -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-light uppercase tracking-[0.6em] mb-12 text-center">
+  		Portfolio Laura
+	</h1>
+
+    <!-- Contenedor de imágenes -->
+    <div class="w-full flex flex-col md:flex-row items-center justify-center gap-8">
+      <!-- Lado izquierdo (misma proporción que el derecho) -->
+      <div class="w-full md:w-1/6 flex justify-center">
+        <div class="w-40 md:w-full max-w-[180px] rounded-lg overflow-hidden shadow-lg">
+          <img src="/LauraPorrecaFlores.png" alt="pieza izquierda" class="w-full h-full object-cover block" />
+        </div>
+      </div>
+
+      <!-- Centro (más grande) -->
+      <div class="w-full md:w-2/3 flex justify-center">
+        <div class="w-full max-w-3xl rounded-lg overflow-hidden shadow-xl">
+          <img src="/ArteLauraPorrecaPrincipal.png" alt="pieza central" class="w-full h-auto object-cover block" />
+        </div>
+      </div>
+
+      <!-- Lado derecho (igual al izquierdo) -->
+      <div class="w-full md:w-1/6 flex justify-center">
+        <div class="w-40 md:w-full max-w-[180px] rounded-lg overflow-hidden shadow-lg">
+          <img src="/LauraPorrecaFlores2.png" alt="pieza derecha" class="w-full h-full object-cover block" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<Seccion />

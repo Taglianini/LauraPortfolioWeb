@@ -1,15 +1,30 @@
----
-
----
-<header class="">
-  <div class="container px-4 py-5 flex justify-between items-center">
-    <img src="/LogoLaura.png" alt="Logo" class="h-24 w-20"/>
-    <nav>
-      <ul class="flex space-x-6">
-        <li><a href="#about" class="hover:text-gray-800">Inicio</a></li>
-        <li><a href="#projects" class="hover:text-gray-800">Sobre mi</a></li>
-        <li><a href="#contact" class="hover:text-gray-800">Categorias</a></li>
-        <li><a href="#contact" class="hover:text-gray-800">Contacto</a></li>
-      </ul>
-    </nav>
+<header class="bg-[#ED996B] w-380 py-4 px-40 flex items-center justify-between">
+  <!-- Logo -->
+  <div class="flex items-center">
+    <img src="/LogoLaura.png" alt="Logo" class="h-24 w-auto object-contain" />
   </div>
+
+  <!-- Navegación -->
+  <nav class="hidden md:flex items-center space-x-10 text-white font-semibold">
+    <a href="#" class="hover:text-[#4D7DF6] transition-opacity">Inicio</a>
+    <a href="#" class="hover:text-[#4D7DF6] transition-opacity">Sobre mí</a>
+    <a href="#" class="hover:text-[#4D7DF6] transition-opacity">Categorías</a>
+    <a href="#" class="hover:text-[#4D7DF6] transition-opacity">Contacto</a>
+
+    <!-- Selector de idioma -->
+    <div class="relative group cursor-pointer">
+      <span class="flex items-center gap-1">
+        IT
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </span>
+
+      <!-- Dropdown idiomas -->
+      <div class="absolute right-0 mt-2 hidden group-hover:block bg-white text-[#ED996B] rounded-md shadow-lg">
+        <a href="#" class="block px-4 py-2 hover:bg-[#004840] hover:text-white transition-colors">IT</a>
+        <a href="#" class="block px-4 py-2 hover:bg-[#004840] hover:text-white transition-colors">ES</a>
+      </div>
+    </div>
+  </nav>
+</header>
