@@ -1,47 +1,48 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Momo Trust Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Definimos las fuentes integradas en Tailwind */
+  --font-sans: 'Momo Trust Sans', system-ui, sans-serif;
+  --font-serif: 'Adamina', serif;
+
+  /* Definimos tus colores globales */
+  --color-primary: #ED996B;
+  --color-text-main: #ffffff;
+  --color-accent: #4D7DF6; /* El azul que usas en hover */
 }
+
+/* Carga de fuentes */
 @font-face {
-    font-family: 'Adamina';
-    src: url('../assets/fonts/Adamina-Regular.woff2')format('woff2'),
-        url('../assets/fonts/Adamina-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Momo Trust Sans';
-    src: url('../assets/fonts/MomoTrustSans-Bold.woff2') format('woff2'),
-        url('../assets/fonts/MomoTrustSans-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Adamina';
+  src: url('../assets/fonts/Adamina-Regular.woff2') format('woff2'),
+       url('../assets/fonts/Adamina-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Momo Trust Sans';
-    src: url('../assets/fonts/MomoTrustSans-Regular.woff2') format('woff2'),
-        url('../assets/fonts/MomoTrustSans-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Momo Trust Sans';
+  src: url('../assets/fonts/MomoTrustSans-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Momo Trust Sans';
+  src: url('../assets/fonts/MomoTrustSans-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Momo Trust Sans';
+  src: url('../assets/fonts/MomoTrustSans-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
-@font-face {
-    font-family: 'Momo Trust Sans';
-    src: url('../assets/fonts/MomoTrustSans-Light.woff2') format('woff2'),
-        url('../assets/fonts/MomoTrustSans-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
-}
 body {
-  background-color: #ED996B;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  gap: 1rem;
+  @apply bg-primary text-text-main flex flex-col min-h-screen;
 }

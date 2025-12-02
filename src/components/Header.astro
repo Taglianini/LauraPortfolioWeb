@@ -1,30 +1,29 @@
-<header class="bg-[#ED996B] w-380 py-4 px-40 flex items-center justify-between">
-  <!-- Logo -->
-  <div class="flex items-center">
-    <img src="/LogoLaura.png" alt="Logo" class="h-24 w-auto object-contain" />
+<header class="w-full bg-primary py-4 px-4 md:px-10 flex items-center justify-center">
+  <div class="w-full max-w-7xl flex items-center justify-between">
+      <a href="/" class="flex items-center">
+        <img src="/LogoLaura.png" alt="Laura Porreca Logo" class="h-20 w-auto object-contain" />
+      </a>
+
+      <nav class="hidden md:flex items-center space-x-10 text-white font-semibold font-sans">
+        <a href="/" class="hover:text-accent transition-colors duration-300">Inicio</a>
+        <a href="#" class="hover:text-accent transition-colors duration-300">Sobre mí</a>
+        <a href="/categorias" class="hover:text-accent transition-colors duration-300">Categorías</a>
+        <a href="#" class="hover:text-accent transition-colors duration-300">Contacto</a>
+
+        <div class="relative group cursor-pointer font-normal">
+          <span class="flex items-center gap-1 hover:text-accent transition-colors">
+            IT
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </span>
+          <div class="absolute right-0 top-full pt-2 hidden group-hover:block z-50">
+             <div class="bg-white text-primary rounded-md shadow-lg overflow-hidden flex flex-col">
+                <a href="#" class="px-6 py-2 hover:bg-primary hover:text-white transition-colors">IT</a>
+                <a href="#" class="px-6 py-2 hover:bg-primary hover:text-white transition-colors">ES</a>
+             </div>
+          </div>
+        </div>
+      </nav>
   </div>
-
-  <!-- Navegación -->
-  <nav class="hidden md:flex items-center space-x-10 text-white font-semibold">
-    <a href="#" class="hover:text-[#4D7DF6] transition-opacity">Inicio</a>
-    <a href="#" class="hover:text-[#4D7DF6] transition-opacity">Sobre mí</a>
-    <a href="#" class="hover:text-[#4D7DF6] transition-opacity">Categorías</a>
-    <a href="#" class="hover:text-[#4D7DF6] transition-opacity">Contacto</a>
-
-    <!-- Selector de idioma -->
-    <div class="relative group cursor-pointer">
-      <span class="flex items-center gap-1">
-        IT
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
-      </span>
-
-      <!-- Dropdown idiomas -->
-      <div class="absolute right-0 mt-2 hidden group-hover:block bg-white text-[#ED996B] rounded-md shadow-lg">
-        <a href="#" class="block px-4 py-2 hover:bg-[#004840] hover:text-white transition-colors">IT</a>
-        <a href="#" class="block px-4 py-2 hover:bg-[#004840] hover:text-white transition-colors">ES</a>
-      </div>
-    </div>
-  </nav>
 </header>

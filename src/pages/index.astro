@@ -4,8 +4,10 @@ import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 ---
+
 <Layout>
-	<Header />
-	<Welcome />
+    <Header />
+    <main class="grow"> <Welcome />
+    </main>
+    <Footer />
 </Layout>
-<Footer />

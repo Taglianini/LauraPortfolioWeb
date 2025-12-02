@@ -1,0 +1,18 @@
+---
+// src/pages/categorias.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CategoriasGrid from '../components/Categorias.astro'; // Importamos el componente que acabamos de crear
+
+// Puedes cambiar el título de la página para el navegador
+const pageTitle = "Categorías | Laura Porreca";
+---
+
+<Layout title={pageTitle}>
+    <Header activeItem="categorias" /> <main class="grow">
+        <CategoriasGrid />
+    </main>
+
+    <Footer />
+</Layout>

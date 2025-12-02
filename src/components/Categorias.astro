@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets'; // 1. Importamos el componente optimizado
+
+import imgCeramica from '../assets/categories/CeramicaLauraWeb.jpg';
+import imgPinturas from '../assets/categories/PinturasLauraWeb.jpg';
+import imgTejidos from '../assets/categories/TejidosLauraWeb.jpg';
+import imgMosaicos from '../assets/categories/MosaicosLauraWeb.jpg';
+import imgMunecas from '../assets/categories/MunecasLauraWeb.jpg';
+import imgOtros from '../assets/categories/OtrosLauraWeb.jpg';
+import imgEventos from '../assets/categories/EventosLauraWeb.jpg';
+
+const categories = [
+  { name: 'CERÁMICA', image: imgCeramica, link: '#' },
+  { name: 'PINTURAS', image: imgPinturas, link: '#' },
+  { name: 'TEJIDOS', image: imgTejidos, link: '#' },
+  { name: 'MOSAICOS', image: imgMosaicos, link: '#' },
+  { name: 'MUÑECAS', image: imgMunecas, link: '#' },
+  { name: 'OTROS', image: imgOtros, link: '#' },
+  { name: 'EVENTOS', image: imgEventos, link: '#' },
+];
+---
+
+<section class="w-full bg-primary py-16 px-4 md:px-10">
+  <div class="max-w-7xl mx-auto">
+    <h1 class="text-center text-white font-sans text-4xl md:text-5xl uppercase tracking-[0.2em] mb-12 md:mb-16">
+      Categorias
+    </h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 place-items-center">
+      {
+        categories.map((category) => (
+          <a
+            href={category.link}
+            class="group relative w-full h-full aspect-square overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+          >
+            <Image
+              src={category.image}
+              alt={`Categoría ${category.name}`}
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+
+            <div class="absolute inset-0 bg-black/30 transition-colors duration-300 group-hover:bg-black/50"></div>
+
+            <div class="absolute inset-0 flex items-center justify-center p-4">
+              <h2 class="text-white font-serif text-2xl md:text-3xl uppercase tracking-widest text-center relative z-10">
+                {category.name}
+              </h2>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
