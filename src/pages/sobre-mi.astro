@@ -1,0 +1,65 @@
+---
+// src/pages/sobre-mi.astro
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+// Importamos las imágenes desde assets
+import imgLaura from '../assets/categories/SobreMiLauraWeb.png';
+import imgGato from '../assets/categories/GatoCrochetLauraWeb.png';
+
+const pageTitle = "Sobre Mí | Laura Porreca";
+---
+
+<Layout title={pageTitle}>
+    <Header activeItem="sobre-mi" />
+    
+    <main class="grow w-full bg-primary relative overflow-hidden flex items-center min-h-[80vh]">
+        <div class="max-w-7xl mx-auto px-4 md:px-10 py-16 relative z-10 w-full">
+            
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-light uppercase tracking-[0.6em] mb-12 text-center">
+                Sobre Mi
+            </h1>
+
+            <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-center">
+                
+                <div class="w-full md:w-1/2 flex justify-center md:justify-start">
+                    <div class="w-full max-w-[500px] aspect-square rounded-lg overflow-hidden shadow-xl">
+                        <Image
+                            src={imgLaura}
+                            alt="Laura Porreca"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 text-white flex flex-col gap-6 text-left">
+                    <h2 class="font-serif text-4xl md:text-5xl">
+                        Laura Porreca
+                    </h2>
+                    
+                    <div class="font-sans text-lg leading-relaxed space-y-4">
+                        <p>
+                            Mí nombre es Laura y vivo en Diano Castello, norte de Italia.
+                        </p>
+                        <p>
+                            Soy profesora de arte y trabajé en mí taller en Argentina por más de 20 años, enseñando arte a personas de todas las edades.
+                        </p>
+                        <p>
+                            Si hay algo que te guste no dudes en comunicarte y yo te lo realizo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-4 right-4 z-0 translate-y-0 translate-x-0 md:bottom-10 md:right-10">
+            <Image
+                src={imgGato}
+                alt="Gato de crochet"
+                class="w-32 md:w-56 h-auto object-contain opacity-90 drop-shadow-lg brightness-95"
+            />
+        </div>
+    </main>
+    <Footer />
+</Layout>
