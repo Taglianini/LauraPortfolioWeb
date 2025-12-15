@@ -1,3 +1,7 @@
+---
+import { ACTION_ERROR_CODES } from "astro:actions";
+---
+
 <footer class="w-full flex justify-center">
 
   <div class="w-full max-w-6xl bg-[#00473e] rounded-t-3xl px-12 py-12 relative">
@@ -11,8 +15,8 @@
 
       <!-- Categorías -->
       <div class="text-left">
-        <h3 class="text-white text-xl font-semibold mb-3">Categorías</h3>
-        <ul class="text-white space-y-1">
+        <a href="/categorias" class="text-white text-xl font-semibold mb-10">Categorías</a>
+        <ul class="text-white space-y-1 mt-3">
           <li>Cerámica</li>
           <li>Pinturas</li>
           <li>Tejidos</li>
@@ -24,16 +28,16 @@
 
       <!-- Contacto -->
       <div class="text-left">
-        <h3 class="text-white text-xl font-semibold mb-3">Contacto</h3>
-        <p class="text-white">+39 376 027-5469</p>
+        <a class="text-white text-xl font-semibold mb-10">Contacto</a>
+        <p class="text-white mt-3">+39 376 027-5469</p>
         <p class="text-white">laura@gmail.com</p>
       </div>
 
       <!-- Redes -->
       <div class="text-left">
-        <h3 class="text-white text-xl font-semibold mb-3">Redes</h3>
-        <p class="text-white font-semibold">Facebook: Laura Porreca</p>
-        <p class="text-white font-semibold">Instagram: Laura_Porreca</p>
+        <a class="text-white text-xl font-semibold mb-5">Redes</a><br>
+        <a class="text-white mt-3" href="https://www.facebook.com/tallerdearte.temperley">Facebook: Laura Porreca</a><br>
+        <a class="text-white mt-3" href="https://www.instagram.com/Laura_Porreca">Instagram: Laura_Porreca</a>
       </div>
 
     </div>
