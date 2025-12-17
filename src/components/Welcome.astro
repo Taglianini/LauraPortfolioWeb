@@ -1,6 +1,7 @@
 ---
+import Image from "astro/components/Image.astro";
 import Seccion from "./Seccion.astro";
-
+import imgMariposa from '../assets/decorative/MariposaLauraWeb.png';
 ---
 <section class="w-full text-white font-sans">
   <div class="max-w-7xl mx-auto px-8 md:px-16 py-16">
@@ -32,6 +33,13 @@ import Seccion from "./Seccion.astro";
         </div>
       </div>
     </div>
+  </div>
+  <div class="absolute right-0 top-[90%] -translate-y-1/2 z-0 hidden md:block pr-4 lg:pr-10">
+      <Image
+        src={imgMariposa}
+        alt="Mariposa decorativa"
+        class="w-40 lg:w-56 h-auto drop-shadow-lg -rotate-25 transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-4 hover:rotate-[-30deg] cursor-pointer"
+      />
   </div>
 </section>
 
