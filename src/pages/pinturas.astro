@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Galeria from '../components/Galeria.astro';
+
+// 1. Cargamos TODAS las imágenes de la carpeta 'pinturas' de golpe.
+// { eager: true } es importante para que las imágenes estén listas para usarse ya mismo.
+const archivosImagenes = import.meta.glob('/src/assets/pinturas/*.{jpeg,jpg,png,gif}', { eager: true });
+
+// 2. Transformamos esos archivos al formato que pide tu componente Galeria.
+// Object.entries nos da una lista de [ruta, modulo_imagen]
+const imagenesGaleria = Object.entries(archivosImagenes).map(([ruta, archivo]: [string, any]) => {
+  
+  // Truco: Usamos el nombre del archivo para generar el Título automáticamente.
+  // Ej: "/src/assets/pinturas/Atardecer-Rojo.jpg" -> "Atardecer Rojo"
+const fileName = ruta.split('/').pop() ?? ''; // Si falla, usa texto vacío
+const nombreArchivo = fileName.split('.').shift() ?? 'Sin Título';
+const tituloLegible = nombreArchivo.replace(/-/g, ' ');
+
+  return {
+    src: archivo.default, // Aquí está la data de la imagen (ImageMetadata)
+    alt: `Obra de arte: ${tituloLegible}`,
+  };
+});
+---
+<Layout title="Galería de Pinturas">
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-center mb-10">Mis pinturas</h1>
+    
+    <Galeria images={imagenesGaleria} />
+    
+  </main>
+</Layout>   

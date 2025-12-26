@@ -1,6 +1,8 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import "../styles/global.css";
+import Header from '../components/Header.astro'; // Asegúrate de tener este componente
+import Footer from '../components/Footer.astro'
 ---
 
 <!doctype html>
@@ -15,6 +17,8 @@ import "../styles/global.css";
         <ClientRouter />
     </head>
     <body>
+        <Header />
         <slot />
+        <Footer />
     </body>
 </html>
