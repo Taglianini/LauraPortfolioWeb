@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Galeria from '../components/Galeria.astro';
+
+// 1. getStaticPaths: Aquí defines qué URLs van a existir en tu web.
+// Astro necesita saber esto para construir las carpetas HTML antes de subir a Cloudflare.
+export function getStaticPaths() {
+  return [
+    { params: { categoria: 'pinturas' }, props: { titulo: 'Pinturas al Óleo' } },
+    { params: { categoria: 'ceramica' }, props: { titulo: 'Cerámica Artesanal' } },
+    { params: { categoria: 'tejidos' },  props: { titulo: 'tejidos' } },
+    { params: { categoria: 'mosaicos' },  props: { titulo: 'Tecnica de Mosaiquismo' } },
+    { params: { categoria: 'muñecas' },  props: { titulo: 'Muñecas y reparaciones' } },
+    { params: { categoria: 'otros' },  props: { titulo: 'Distintos tipo de arte' } },
+    { params: { categoria: 'eventos' },  props: { titulo: 'Souvenirs y Tortas' } },
+
+    // Agrega aquí todas las categorías que tengas carpetas
+  ];
+}
+
+// 2. Recuperamos los datos de la URL actual
+const { categoria } = Astro.params;
+const { titulo } = Astro.props;
+
+// 3. Cargamos TODAS las imágenes de la carpeta assets (de todas las subcarpetas)
+// Usamos /**/* para que busque en profundidad
+const allImages = import.meta.glob('/src/assets/**/*.{jpeg,jpg,png,webp}', { eager: true });
+
+// 4. FILTRADO MÁGICO:
+// Seleccionamos solo las imágenes cuya ruta contenga el nombre de la categoría actual.
+// Ej: si estamos en /pinturas/, solo agarramos las que digan /src/assets/pinturas/...
+const imagenesFiltradas = Object.entries(allImages)
+  .filter(([path]) => path.includes(`/${categoria}/`))
+  .map(([path, image]: [string, any]) => {
+    
+    // Lógica de nombres (la misma que ya tenías)
+    const fileName = path.split('/').pop() ?? '';
+    const nameWithoutExt = fileName.split('.').shift() ?? 'Sin Título';
+    const cleanTitle = nameWithoutExt.replace(/-/g, ' ');
+
+    return {
+      src: image.default,
+      alt: `Obra: ${cleanTitle}`,
+    };
+  });
+---
+
+<Layout title={`Galería de ${titulo}`}>
+  <main class="container mx-auto px-4 py-8">
+    
+    <h1 class="text-4xl font-serif font-bold text-center mb-10 text-primary capitalize">
+      {titulo}
+    </h1>
+
+    {imagenesFiltradas.length > 0 ? (
+      <Galeria images={imagenesFiltradas} />
+    ) : (
+      <p class="text-center text-gray-500">Aún no hay obras cargadas en esta categoría.</p>
+    )}
+
+  </main>
+</Layout>
