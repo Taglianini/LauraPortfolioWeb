@@ -1,10 +1,7 @@
 ---
 // src/pages/sobre-mi.astro
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import { Image } from 'astro:assets';
-// Importamos las imágenes desde assets
 import imgLaura from '../assets/categories/SobreMiLauraWeb.png';
 import imgGato from '../assets/categories/GatoCrochetLauraWeb.png';
 
@@ -13,17 +10,18 @@ const pageTitle = "Sobre Mí | Laura Porreca";
 
 <Layout title={pageTitle}>
     
-    <main class="grow w-full bg-primary relative overflow-hidden flex items-center min-h-[10vh]">
-        <div class="max-w-7xl mx-auto px-4 py-12 relative z-10 w-full">
+    <main class="grow w-full bg-primary relative overflow-hidden flex flex-col items-center justify-center min-h-[80vh]">
+        
+        <div class="max-w-6xl mx-auto px-6 md:px-12 py-12 relative z-10 w-full">
             
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-light uppercase tracking-[0.6em] mb-10 text-center">
+            <h1 class="text-3xl sm:text-6xl md:text-6xl font-light uppercase tracking-[0.2em] md:tracking-[0.6em] mb-12 text-center pl-[0.2em] md:pl-[0.6em]">
                 Sobre Mi
             </h1>
 
-            <div class="flex flex-col md:flex-row gap-6 md:gap-12 items-center">
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
                 
-                <div class="md:w-1/2 flex justify-center md:justify-start">
-                    <div class="w-full max-w-[500px] aspect-square rounded-lg overflow-hidden shadow-xl ml-15">
+                <div class="w-full md:w-1/2 flex justify-center md:justify-start">
+                    <div class="w-full max-w-[280px] md:max-w-[400px] aspect-square rounded-lg overflow-hidden shadow-xl mx-auto md:mx-0">
                         <Image
                             src={imgLaura}
                             alt="Laura Porreca"
@@ -32,12 +30,12 @@ const pageTitle = "Sobre Mí | Laura Porreca";
                     </div>
                 </div>
 
-                <div class="w-full flex flex-col gap-15 text-left">
+                <div class="w-full md:w-1/2 flex flex-col gap-6 text-center md:text-left mt-4 md:mt-0">
                     <h2 class="font-serif text-4xl md:text-5xl">
                         Laura Porreca
                     </h2>
                     
-                    <div class="font-sans text-lg leading-relaxed space-y-4 max-w-md">
+                    <div class="font-sans text-lg leading-relaxed space-y-4 max-w-md mx-auto md:mx-0">
                         <p>
                             Mí nombre es Laura y vivo en Diano Castello, norte de Italia.
                             Soy profesora de arte y trabajé en mí taller en Argentina por más de 20 años, enseñando arte a personas de todas las edades.
@@ -45,15 +43,17 @@ const pageTitle = "Sobre Mí | Laura Porreca";
                         </p>
                     </div>
                 </div>
+
             </div>
         </div>
 
-        <div class="absolute bottom-4 right-4 z-20 translate-y-0 translate-x-0 md:bottom-10 md:right-10">
-    <Image
-        src={imgGato}
-        alt="Gato de crochet"
-        class="w-32 md:w-56 h-auto object-contain opacity-90 drop-shadow-lg brightness-95 transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-4 hover:rotate-6 cursor-pointer"
-    />
-</div>
+        <div class="relative w-full flex justify-end px-4 mt-12 md:absolute md:mt-0 md:bottom-10 md:right-10 md:block md:w-auto z-20">
+            <Image
+                src={imgGato}
+                alt="Gato de crochet"
+                class="w-32 md:w-56 h-auto object-contain opacity-90 drop-shadow-lg brightness-95 transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-4 hover:rotate-6 cursor-pointer"
+            />
+        </div>
+
     </main>
 </Layout>

@@ -13,7 +13,9 @@ interface Props {
 
 const { images } = Astro.props;
 ---
-
+<h1 class="text-3xl sm:text-6xl md:text-6xl font-light uppercase tracking-[0.2em] md:tracking-[0.6em] mb-12 -mt-20 text-center pl-[0.2em] md:pl-[0.6em]">
+      Pinturas
+    </h1>
 <div id="mi-galeria" class="relative w-full mx-auto transition-all duration-500 opacity-0" class:list={["opacity-100"]}>
   
   {images.map((imagen) => (

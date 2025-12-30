@@ -3,44 +3,46 @@ import Image from "astro/components/Image.astro";
 import Seccion from "./Seccion.astro";
 import imgMariposa from '../assets/decorative/MariposaLauraWeb.png';
 ---
-<section class="w-full text-white font-sans">
-  <div class="max-w-7xl mx-auto px-8 md:px-16 py-16">
-    <!-- Título (mayúsculas + tracking) -->
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-light uppercase tracking-[0.6em] mb-12 text-center">
-  		Portfolio Laura
-	</h1>
 
-    <!-- Contenedor de imágenes -->
+<section class="relative w-full text-white font-sans overflow-hidden">
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-8 md:px-16 py-16">
+    
+    <h1 class="text-3xl sm:text-6xl md:text-6xl font-light uppercase tracking-[0.2em] md:tracking-[0.6em] mb-12 text-center pl-[0.2em] md:pl-[0.6em]">
+      Portfolio Laura
+    </h1>
+
     <div class="w-full flex flex-col md:flex-row items-center justify-center gap-8">
-      <!-- Lado izquierdo (misma proporción que el derecho) -->
+      
       <div class="w-full md:w-1/6 flex justify-center">
-        <div class="w-40 md:w-full max-w-[180px] rounded-lg overflow-hidden shadow-lg">
+        <div class="w-40 md:w-full max-w-[180px] rounded-lg overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-105">
           <img src="/LauraPorrecaFlores.png" alt="pieza izquierda" class="w-full h-full object-cover block" />
         </div>
       </div>
 
-      <!-- Centro (más grande) -->
       <div class="w-full md:w-2/3 flex justify-center">
-        <div class="w-full max-w-3xl rounded-lg overflow-hidden shadow-xl">
+        <div class="w-full max-w-3xl rounded-lg overflow-hidden shadow-xl transform transition-transform duration-500 hover:scale-[1.02]">
           <img src="/ArteLauraPorrecaPrincipal.png" alt="pieza central" class="w-full h-auto object-cover block" />
         </div>
       </div>
 
-      <!-- Lado derecho (igual al izquierdo) -->
       <div class="w-full md:w-1/6 flex justify-center">
-        <div class="w-40 md:w-full max-w-[180px] rounded-lg overflow-hidden shadow-lg">
+        <div class="w-40 md:w-full max-w-[180px] rounded-lg overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-105">
           <img src="/LauraPorrecaFlores2.png" alt="pieza derecha" class="w-full h-full object-cover block" />
         </div>
       </div>
+
     </div>
   </div>
-  <div class="absolute right-0 top-[90%] -translate-y-1/2 z-0 hidden md:block pr-4 lg:pr-10">
+
+  <div class="absolute right-0 bottom-10 z-0 hidden xl:block pr-4 lg:pr-10 translate-x-10 hover:translate-x-0 transition-transform duration-500">
       <Image
         src={imgMariposa}
         alt="Mariposa decorativa"
-        class="w-40 lg:w-56 h-auto drop-shadow-lg -rotate-25 transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-4 hover:rotate-[-30deg] cursor-pointer"
+        class="w-40 lg:w-56 h-auto drop-shadow-lg -rotate-25 hover:rotate-[-30deg] cursor-pointer opacity-90"
       />
   </div>
+
 </section>
 
 <Seccion />
