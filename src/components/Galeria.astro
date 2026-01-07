@@ -55,6 +55,7 @@ const { images, titulo } = Astro.props;
     const container = document.getElementById('mi-galeria');
     
     if (container) {
+      // 1. Inicializamos MiniMasonry
       const masonry = new MiniMasonry({
         container: container,
         gutter: 0,
@@ -62,19 +63,48 @@ const { images, titulo } = Astro.props;
         surroundingGutter: false
       });
 
-      container.classList.remove('opacity-0');
-      
+      // Función auxiliar para recalcular
+      const recalcular = () => {
+          masonry.layout();
+          container.classList.remove('opacity-0');
+      };
+
+      // 2. Ejecutar inmediatamente (por si ya hay caché)
+      recalcular();
+
+      // 3. Vigilar cada imagen individualmente
       const imgs = container.querySelectorAll('img');
       imgs.forEach(img => {
           if (img.complete) {
-              masonry.layout();
+              recalcular();
           } else {
-              img.addEventListener('load', () => masonry.layout());
+              // Cada vez que una foto termine de cargar, reordenamos todo
+              img.addEventListener('load', recalcular);
           }
       });
+
+      // 4. EL FIX MÁGICO PARA LOCALHOST (Failsafe)
+      // Forzamos un recálculo a los 500ms y a los 2 segundos.
+      // Esto arregla los casos donde el navegador tarda en pintar la altura.
+      setTimeout(recalcular, 250);
+      setTimeout(recalcular, 500);
+      setTimeout(recalcular, 2000);
     }
   }
 
+  // Ejecutamos en carga inicial y navegaciones de Astro
   document.addEventListener('astro:page-load', initMasonry);
-  window.addEventListener('resize', initMasonry);
+  
+  // Recalcular si cambian el tamaño de la ventana
+  window.addEventListener('resize', () => {
+      const container = document.getElementById('mi-galeria');
+      if(container) {
+         // Truco: a veces hay que reiniciar la instancia en resize
+         // pero generalmente layout() alcanza.
+         // new MiniMasonry({ container... }).layout(); 
+         // Si MiniMasonry expone la instancia globalmente sería mejor, 
+         // pero re-ejecutar initMasonry es seguro aquí.
+         initMasonry(); 
+      }
+  });
 </script>
