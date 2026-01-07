@@ -6,13 +6,13 @@ import Galeria from '../components/Galeria.astro';
 // Astro necesita saber esto para construir las carpetas HTML antes de subir a Cloudflare.
 export function getStaticPaths() {
   return [
-    { params: { categoria: 'pinturas' }, props: { titulo: 'Pinturas al Óleo' } },
-    { params: { categoria: 'ceramica' }, props: { titulo: 'Cerámica Artesanal' } },
-    { params: { categoria: 'tejidos' },  props: { titulo: 'tejidos' } },
-    { params: { categoria: 'mosaicos' },  props: { titulo: 'Tecnica de Mosaiquismo' } },
-    { params: { categoria: 'muñecas' },  props: { titulo: 'Muñecas y reparaciones' } },
-    { params: { categoria: 'otros' },  props: { titulo: 'Distintos tipo de arte' } },
-    { params: { categoria: 'eventos' },  props: { titulo: 'Souvenirs y Tortas' } },
+    { params: { categoria: 'pinturas' }, props: { titulo: 'Pinturas' } },
+    { params: { categoria: 'ceramica' }, props: { titulo: 'Cerámica' } },
+    { params: { categoria: 'tejidos' },  props: { titulo: 'Tejidos' } },
+    { params: { categoria: 'mosaicos' },  props: { titulo: 'Mosaiquismo' } },
+    { params: { categoria: 'muñecas' },  props: { titulo: 'Muñecas' } },
+    { params: { categoria: 'otros' },  props: { titulo: 'Otros' } },
+    { params: { categoria: 'eventos' },  props: { titulo: 'Eventos' } },
 
     // Agrega aquí todas las categorías que tengas carpetas
   ];
@@ -53,7 +53,10 @@ const imagenesFiltradas = Object.entries(allImages)
     </h1>
 
     {imagenesFiltradas.length > 0 ? (
-      <Galeria images={imagenesFiltradas} />
+      <Galeria 
+        images={imagenesFiltradas} 
+        titulo={titulo} 
+      />
     ) : (
       <p class="text-center text-gray-500">Aún no hay obras cargadas en esta categoría.</p>
     )}
