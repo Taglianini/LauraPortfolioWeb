@@ -1,39 +1,71 @@
 ---
+// src/pages/[categoria].astro
 import Layout from '../layouts/Layout.astro';
 import Galeria from '../components/Galeria.astro';
 
-// 1. getStaticPaths: Aquí defines qué URLs van a existir en tu web.
-// Astro necesita saber esto para construir las carpetas HTML antes de subir a Cloudflare.
 export function getStaticPaths() {
   return [
-    { params: { categoria: 'pinturas' }, props: { titulo: 'Pinturas' } },
-    { params: { categoria: 'ceramica' }, props: { titulo: 'Cerámica' } },
-    { params: { categoria: 'tejidos' },  props: { titulo: 'Tejidos' } },
-    { params: { categoria: 'mosaicos' },  props: { titulo: 'Mosaiquismo' } },
-    { params: { categoria: 'muñecas' },  props: { titulo: 'Muñecas' } },
-    { params: { categoria: 'otros' },  props: { titulo: 'Otros' } },
-    { params: { categoria: 'eventos' },  props: { titulo: 'Eventos' } },
-
-    // Agrega aquí todas las categorías que tengas carpetas
+    { 
+      params: { categoria: 'ceramica' }, 
+      props: { 
+        titulo: 'Cerámica y Porcelana', 
+        descripcion: 'Piezas únicas modeladas a mano, esmaltadas y hechas con dedicación.' 
+      } 
+    },
+    { 
+      params: { categoria: 'pinturas' }, 
+      props: { 
+        titulo: 'Pinturas', 
+        descripcion: 'Las técnicas pictóricas varían según los materiales y los soportes. Pueden ser técnicas secas o húmedas. Trabajo todas las técnicas pictóricas: acuarela, acrílico, óleo, tinta china, témpera, gouache, pastel, carbonilla, esfumado y collage. Se pueden realizar desde piezas pequeñas hasta gigantografías.' 
+      } 
+    },
+    { 
+      params: { categoria: 'mosaicos' }, 
+      props: { 
+        titulo: 'Mosaicos', 
+        descripcion: 'Realizados con pequeñas piezas de cerámica, vidrio y materiales reciclados como platos, vasos, etc. Creo cuadros en mosaico.' 
+      } 
+    },
+    { 
+      params: { categoria: 'tejidos' },  
+      props: { 
+        titulo: 'Tejidos', 
+        descripcion: 'Técnicas textiles. Trabajo con agujas de tejer, crochet, bordado y telar. Trabajo sobre telas como algodón, lino y seda, utilizando pincel, stencil o la técnica de batik.' 
+      } 
+    },
+    { 
+      params: { categoria: 'otros' },    
+      props: { 
+        titulo: 'Otros', 
+        descripcion: 'Una selección variada de proyectos especiales.' 
+      } 
+    },
+    { 
+      params: { categoria: 'eventos' },  
+      props: { 
+        titulo: 'Eventos', 
+        descripcion: '' 
+      } 
+    },
+    { 
+      params: { categoria: 'muñecas' },  
+      props: { 
+        titulo: 'Muñecas', 
+        descripcion: '' 
+      } 
+    },
   ];
 }
 
-// 2. Recuperamos los datos de la URL actual
 const { categoria } = Astro.params;
-const { titulo } = Astro.props;
+const { titulo, descripcion } = Astro.props;
 
-// 3. Cargamos TODAS las imágenes de la carpeta assets (de todas las subcarpetas)
-// Usamos /**/* para que busque en profundidad
+// --- LÓGICA DE IMÁGENES ---
 const allImages = import.meta.glob('/src/assets/**/*.{jpeg,jpg,png,webp}', { eager: true });
 
-// 4. FILTRADO MÁGICO:
-// Seleccionamos solo las imágenes cuya ruta contenga el nombre de la categoría actual.
-// Ej: si estamos en /pinturas/, solo agarramos las que digan /src/assets/pinturas/...
 const imagenesFiltradas = Object.entries(allImages)
   .filter(([path]) => path.includes(`/${categoria}/`))
   .map(([path, image]: [string, any]) => {
-    
-    // Lógica de nombres (la misma que ya tenías)
     const fileName = path.split('/').pop() ?? '';
     const nameWithoutExt = fileName.split('.').shift() ?? 'Sin Título';
     const cleanTitle = nameWithoutExt.replace(/-/g, ' ');
@@ -46,19 +78,20 @@ const imagenesFiltradas = Object.entries(allImages)
 ---
 
 <Layout title={`Galería de ${titulo}`}>
-  <main class="container mx-auto px-4 py-8">
+  <main class="container mx-auto px-4 py-12">
     
-    <h1 class="text-4xl font-serif font-bold text-center mb-10 text-primary capitalize">
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-light uppercase tracking-[0.2em] md:tracking-[0.6em] mb-8 text-center pl-[0.2em] md:pl-[0.6em] text-white break-words">
       {titulo}
     </h1>
 
+    <p class="text-center text-white text-lg max-w-2xl mx-auto mb-16 px-4 leading-relaxed font-sans">
+      {descripcion}
+    </p>
+
     {imagenesFiltradas.length > 0 ? (
-      <Galeria 
-        images={imagenesFiltradas} 
-        titulo={titulo} 
-      />
+      <Galeria images={imagenesFiltradas} titulo={titulo} />
     ) : (
-      <p class="text-center text-gray-500">Aún no hay obras cargadas en esta categoría.</p>
+      <p class="text-center text-white/80 py-20">Aún no hay obras cargadas en esta categoría.</p>
     )}
 
   </main>
