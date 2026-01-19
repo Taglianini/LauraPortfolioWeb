@@ -1,56 +1,56 @@
 ---
 // src/pages/[categoria].astro
-import Layout from '../layouts/Layout.astro';
-import Galeria from '../components/Galeria.astro';
+import Layout from '../../layouts/Layout.astro';
+import Galeria from '../../components/Galeria.astro';
 
 export function getStaticPaths() {
   return [
     { 
       params: { categoria: 'ceramica' }, 
       props: { 
-        titulo: 'Ceramica e Porcellana', 
-        descripcion: 'Pezzi unici modellati a mano, smaltati e realizzati con cura e dedizione.' 
+        titulo: 'Cerámica y Porcelana', 
+        descripcion: 'Piezas únicas modeladas a mano, esmaltadas y hechas con dedicación.' 
       } 
     },
     { 
       params: { categoria: 'pinturas' }, 
       props: { 
-        titulo: 'Pitture', 
-        descripcion: 'Le tecniche pittoriche variano in base ai materiali e ai supporti. Possono essere tecniche secche o umide. Lavoro tutte le tecniche pittoriche: acquerello, acrilico, olio, inchiostro di Cina, tempera, gouache, pastello, carboncino, sfumato e collage. Si realizzano opere che vanno da piccoli formati a gigantografie.' 
+        titulo: 'Pinturas', 
+        descripcion: 'Las técnicas pictóricas varían según los materiales y los soportes. Pueden ser técnicas secas o húmedas. Trabajo todas las técnicas pictóricas: acuarela, acrílico, óleo, tinta china, témpera, gouache, pastel, carbonilla, esfumado y collage. Se pueden realizar desde piezas pequeñas hasta gigantografías.' 
       } 
     },
     { 
       params: { categoria: 'mosaicos' }, 
       props: { 
-        titulo: 'Mosaici', 
-        descripcion: 'Realizzati con piccole tessere di ceramica, vetro e materiali riciclati come piatti, bicchieri, ecc. Creo quadri in mosaico.' 
+        titulo: 'Mosaicos', 
+        descripcion: 'Realizados con pequeñas piezas de cerámica, vidrio y materiales reciclados como platos, vasos, etc. Creo cuadros en mosaico.' 
       } 
     },
     { 
       params: { categoria: 'tejidos' },  
       props: { 
-        titulo: 'Tessuti', 
-        descripcion: 'Tecniche tessili. Lavoro con ferri da maglia, uncinetto, ricamo e telaio. Opero su tessuti come cotone, lino e seta, utilizzando pennello, stencil o la tecnica del batik.' 
+        titulo: 'Tejidos', 
+        descripcion: 'Técnicas textiles. Trabajo con agujas de tejer, crochet, bordado y telar. Trabajo sobre telas como algodón, lino y seda, utilizando pincel, stencil o la técnica de batik.' 
       } 
     },
     { 
       params: { categoria: 'otros' },    
       props: { 
-        titulo: 'Altri', 
-        descripcion: 'Una selezione variegata di progetti speciali.' 
+        titulo: 'Otros', 
+        descripcion: 'Una selección variada de proyectos especiales.' 
       } 
     },
     { 
       params: { categoria: 'eventos' },  
       props: { 
-        titulo: 'Eventi', 
+        titulo: 'Eventos', 
         descripcion: '' 
       } 
     },
     { 
       params: { categoria: 'muñecas' },  
       props: { 
-        titulo: 'Bambole', 
+        titulo: 'Muñecas', 
         descripcion: '' 
       } 
     },
@@ -60,24 +60,24 @@ export function getStaticPaths() {
 const { categoria } = Astro.params;
 const { titulo, descripcion } = Astro.props;
 
-// --- LOGICA DELLE IMMAGINI ---
+// --- LÓGICA DE IMÁGENES ---
 const allImages = import.meta.glob('/src/assets/**/*.{jpeg,jpg,png,webp}', { eager: true });
 
 const imagenesFiltradas = Object.entries(allImages)
   .filter(([path]) => path.includes(`/${categoria}/`))
   .map(([path, image]: [string, any]) => {
     const fileName = path.split('/').pop() ?? '';
-    const nameWithoutExt = fileName.split('.').shift() ?? 'Senza titolo';
+    const nameWithoutExt = fileName.split('.').shift() ?? 'Sin Título';
     const cleanTitle = nameWithoutExt.replace(/-/g, ' ');
 
     return {
       src: image.default,
-      alt: `Opera: ${cleanTitle}`,
+      alt: `Obra: ${cleanTitle}`,
     };
   });
 ---
 
-<Layout title={`Galleria di ${titulo}`}>
+<Layout title={`Galería de ${titulo}`}>
   <main class="container mx-auto px-4 py-12">
     
     <h1 class="text-3xl sm:text-5xl md:text-6xl font-light uppercase tracking-[0.2em] md:tracking-[0.6em] mb-8 text-center pl-[0.2em] md:pl-[0.6em] text-white break-words">
@@ -91,7 +91,7 @@ const imagenesFiltradas = Object.entries(allImages)
     {imagenesFiltradas.length > 0 ? (
       <Galeria images={imagenesFiltradas} titulo={titulo} />
     ) : (
-      <p class="text-center text-white/80 py-20">Non ci sono ancora opere caricate in questa categoria.</p>
+      <p class="text-center text-white/80 py-20">Aún no hay obras cargadas en esta categoría.</p>
     )}
 
   </main>

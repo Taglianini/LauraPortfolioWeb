@@ -1,0 +1,104 @@
+---
+// src/pages/es/categorias.astro
+import Layout from '../../layouts/Layout.astro'; // 1. IMPORTANTE: Traemos el Layout (Header/Footer)
+import { Image } from 'astro:assets';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { defaultLang } from '../../i18n/ui';
+
+// Importación de imágenes (Usamos ../../ porque estamos dentro de /es/)
+import imgCeramica from '../../assets/categories/CeramicaLauraWeb.jpg';
+import imgPinturas from '../../assets/categories/PinturasLauraWeb.jpg';
+import imgTejidos from '../../assets/categories/TejidosLauraWeb.jpg';
+import imgMosaicos from '../../assets/categories/MosaicosLauraWeb.jpg';
+import imgMunecas from '../../assets/categories/MunecasLauraWeb.jpg';
+import imgOtros from '../../assets/categories/OtrosLauraWeb.jpg';
+import imgEventos from '../../assets/categories/EventosLauraWeb.jpg';
+
+// --- LÓGICA ---
+const lang = Astro.currentLocale || defaultLang;
+
+const texts = {
+  it: {
+    title: 'Categorie',
+    items: {
+      ceramica: 'Ceramica',
+      pinturas: 'Dipinti',
+      tejidos: 'Tessuti',
+      mosaicos: 'Mosaici',
+      muñecas: 'Bambole',
+      otros: 'Altri',
+      eventos: 'Eventi'
+    }
+  },
+  es: {
+    title: 'Categorías',
+    items: {
+      ceramica: 'Cerámica',
+      pinturas: 'Pinturas',
+      tejidos: 'Tejidos',
+      mosaicos: 'Mosaicos',
+      muñecas: 'Muñecas',
+      otros: 'Otros',
+      eventos: 'Eventos'
+    }
+  }
+};
+
+const t = texts[lang as keyof typeof texts];
+
+const categoriesData = [
+  { slug: 'ceramica', img: imgCeramica },
+  { slug: 'pinturas', img: imgPinturas },
+  { slug: 'tejidos',  img: imgTejidos },
+  { slug: 'mosaicos', img: imgMosaicos },
+  { slug: 'muñecas',  img: imgMunecas },
+  { slug: 'otros',    img: imgOtros },
+  { slug: 'eventos',  img: imgEventos },
+];
+
+const categories = categoriesData.map(cat => ({
+  name: t.items[cat.slug as keyof typeof t.items],
+  image: cat.img,
+  link: getRelativeLocaleUrl(lang, cat.slug)
+}));
+---
+
+<Layout title="Categorías | Laura Porreca">
+  <main class="grow">
+    
+    <section class="w-full bg-primary py-12 px-4 md:px-10">
+      <div class="max-w-[1250px] mx-auto">
+        
+        <h1 class="text-3xl sm:text-6xl md:text-6xl font-light uppercase tracking-[0.2em] md:tracking-[0.6em] mb-12 text-center pl-[0.2em] md:pl-[0.6em]">
+          {t.title}
+        </h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 place-items-center">
+          {
+            categories.map((category) => (
+              <a
+                href={category.link}
+                class="group relative w-full h-full aspect-square overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              >
+                <Image
+                  src={category.image}
+                  alt={`Categoría ${category.name}`}
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+
+                <div class="absolute inset-0 bg-black/30 transition-colors duration-300 group-hover:bg-black/50"></div>
+
+                <div class="absolute inset-0 flex items-center justify-center p-4">
+                  <h2 class="text-white font-serif text-2xl md:text-3xl uppercase tracking-widest text-center relative z-10">
+                    {category.name}
+                  </h2>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>

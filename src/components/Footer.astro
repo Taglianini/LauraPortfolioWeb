@@ -1,5 +1,31 @@
 ---
 // src/components/Footer.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { ui, defaultLang } from '../i18n/ui';
+
+const lang = Astro.currentLocale || defaultLang;
+const t = ui[lang as keyof typeof ui];
+
+const catNames = {
+  it: {
+    ceramica: 'Ceramica',
+    pinturas: 'Dipinti',
+    tejidos: 'Tessuti',
+    mosaicos: 'Mosaici',
+    munecas: 'Bambole',
+    otros: 'Altri'
+  },
+  es: {
+    ceramica: 'Cerámica',
+    pinturas: 'Pinturas',
+    tejidos: 'Tejidos',
+    mosaicos: 'Mosaicos',
+    munecas: 'Muñecas',
+    otros: 'Otros'
+  }
+};
+
+const cats = catNames[lang as keyof typeof catNames];
 ---
 
 <footer class="w-full flex justify-center mt-auto">
@@ -9,36 +35,40 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-10 relative z-10">
 
       <div class="flex items-start">
-        <img src="/LogoLaura.png" class="w-20 h-24 object-contain" alt="Logo Laura Porreca" />
+        <a href={getRelativeLocaleUrl(lang, '/')}>
+            <img src="/LogoLaura.png" class="w-20 h-24 object-contain" alt="Logo Laura Porreca" />
+        </a>
       </div>
 
       <div class="flex flex-col text-left">
-        <a href="/categorias" class="text-white text-xl font-semibold mb-2 md:mb-4 hover:text-primary transition-colors">
-          Categorías
+        <a href={getRelativeLocaleUrl(lang, 'categorias')} class="text-white text-xl font-semibold mb-2 md:mb-2 hover:text-orange-200 transition-colors">
+          {t['footer.categorias']}
         </a>
         
         <ul class="hidden md:flex flex-col space-y-2">
-          <li><a href="/ceramica" class="text-white hover:text-accent">Cerámica</a></li>
-          <li><a href="/pinturas" class="text-white hover:text-accent">Pinturas</a></li>
-          <li><a href="/tejidos" class="text-white hover:text-accent">Tejidos</a></li>
-          <li><a href="/mosaicos" class="text-white hover:text-accent ">Mosaicos</a></li>
-          <li><a href="/muñecas" class="text-white hover:text-accent">Muñecas</a></li>
-          <li><a href="/otros" class="text-white hover:text-accent">Otros</a></li>
+          <li><a href={getRelativeLocaleUrl(lang, 'ceramica')} class="text-white hover:underline">{cats.ceramica}</a></li>
+          <li><a href={getRelativeLocaleUrl(lang, 'pinturas')} class="text-white hover:underline">{cats.pinturas}</a></li>
+          <li><a href={getRelativeLocaleUrl(lang, 'tejidos')} class="text-white hover:underline">{cats.tejidos}</a></li>
+          <li><a href={getRelativeLocaleUrl(lang, 'mosaicos')} class="text-white hover:underline">{cats.mosaicos}</a></li>
+          <li><a href={getRelativeLocaleUrl(lang, 'munecas')} class="text-white hover:underline">{cats.munecas}</a></li>
+          <li><a href={getRelativeLocaleUrl(lang, 'otros')} class="text-white hover:underline">{cats.otros}</a></li>
         </ul>
       </div>
 
       <div class="flex flex-col text-left gap-2">
-        <a class="text-white hover:text-primary text-xl font-semibold mb-2 md:mb-1" href="https://wa.me/+393760275469">Contacto</a>
-        <a class="text-white hover:text-accent" href="https://wa.me/+393760275469">+39 376 027-5469</a>
-        <a class="text-white hover:text-accent break-all" href="mailto:porrecalaura@gmail.com">porrecalaura@gmail.com</a>
+        <span class="text-white text-xl font-semibold mb-2 md:mb-2">{t['footer.contacto']}</span>
+        <a class="text-white hover:text-orange-200" href="https://wa.me/+393760275469">+39 376 027-5469</a>
+        <a class="text-white hover:text-orange-200 break-all" href="mailto:porrecalaura@gmail.com">porrecalaura@gmail.com</a>
       </div>
 
       <div class="flex flex-col text-left gap-3">
-        <a class="text-white hover:text-primary text-xl font-semibold -mb-0.5" href="/sobre-mi">Sobre mi</a>
-        <a class="text-white hover:text-accent" href="https://www.facebook.com/tallerdearte.temperley" target="_blank" rel="noopener noreferrer">
+        <a class="text-white text-xl font-semibold" href={getRelativeLocaleUrl(lang, 'sobre-mi')}>
+            {t['footer.sobremi']}
+        </a>
+        <a class="text-white hover:text-orange-200" href="https://www.facebook.com/tallerdearte.temperley" target="_blank" rel="noopener noreferrer">
           Facebook: Laura Porreca
         </a>
-        <a class="text-white hover:text-accent" href="https://www.instagram.com/Laura_Porreca" target="_blank" rel="noopener noreferrer">
+        <a class="text-white hover:text-orange-200" href="https://www.instagram.com/Laura_Porreca" target="_blank" rel="noopener noreferrer">
           Instagram: Laura_Porreca
         </a>
       </div>

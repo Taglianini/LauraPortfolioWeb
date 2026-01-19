@@ -1,33 +1,55 @@
 ---
+// src/components/Seccion.astro
+import { defaultLang } from '../i18n/ui';
 
+// 1. Detectar el idioma actual (IT o ES)
+const lang = Astro.currentLocale || defaultLang;
+
+// 2. EL DICCIONARIO DE TEXTOS
+// Aquí es donde tienes que escribir tu contenido real.
+const texts = {
+  it: {
+    titulo: "La mia passione", 
+    parrafo: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam odio, pretiec aliquet. Suspendisse aliquet nibh a arcu placerat, ut dignissim lorem venenatis. Mauris eget tellus suscipit, sollicitudin leo vel, tincidunt leo. Donec tortor turpis, pulvinar at sapien nec, ultrices finibus nunc. Mauris consectetur vehicula ipsum. Sed elit enim, volutpat id sagittis efficitur, congue at dui. Nunc est risus, ultrices vitae odio non, aliquam aliquet tortor. Vestibulum est nulla, volutpat id sapien ut, auctor congue justo. Suspendisse pretium cursus velit sit amet tincidunt.
+    `,
+    altImgIzq: "Descrizione immagine sinistra", // Importante para Google (SEO)
+    altImgDer: "Descrizione immagine destra"
+  },
+  es: {
+    titulo: "Mi Pasión",
+    parrafo: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam diam odio, pretiec aliquet. Suspendisse aliquet nibh a arcu placerat, ut dignissim lorem venenatis. Mauris eget tellus suscipit, sollicitudin leo vel, tincidunt leo. Donec tortor turpis, pulvinar at sapien nec, ultrices finibus nunc. Mauris consectetur vehicula ipsum. Sed elit enim, volutpat id sagittis efficitur, congue at dui. Nunc est risus, ultrices vitae odio non, aliquam aliquet tortor. Vestibulum est nulla, volutpat id sapien ut, auctor congue justo. Suspendisse pretium cursus velit sit amet tincidunt.`,
+    altImgIzq: "Descripción imagen izquierda",
+    altImgDer: "Descripción imagen derecha"
+  }
+};
+
+// 3. Seleccionamos el texto correcto según el idioma
+const t = texts[lang as keyof typeof texts];
 ---
+
 <section class="w-full px-8 py-30">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
 
-    <!-- Imagen izquierda -->
     <img 
       src="/LauraPorrecaSec.png" 
-      alt="Imagen izquierda"
-      class="w-[300px] md:w-[350px] rounded-xl object-cover"
+      alt={t.altImgIzq}
+      class="w-[300px] md:w-[350px] rounded-xl object-cover shadow-lg"
     />
 
-    <!-- Texto central -->
     <div class="max-w-125 text-white font-sans text-left">
-      <h2 class="text-3xl font-light mb-6">Lorem ipsum</h2>
-      <p class="text-lg leading-relaxed">
-        Lorem ipsum dolor sit amet consectetur adipiscing elit, vehicula hac scelerisque eget rhoncus. 
-        Eleifend nisi laoreet ridiculus nostra dignissim sollicitudin maecenas, nunc sociis dictumst torquent 
-        quis pharetra, diam nascetur viverra mus molestie. 
-        Montes metus donec odio ac imperdiet nisi non congue 
-        Lorem ipsum dolor sit amet consectetur adipiscing elit, vehicula hac scelerisque eget rhoncus.
+      <h2 class="text-3xl font-light mb-6">
+        {t.titulo}
+      </h2>
+      
+      <p class="text-lg leading-relaxed whitespace-pre-line">
+        {t.parrafo}
       </p>
     </div>
 
-    <!-- Imagen derecha -->
     <img 
       src="/LauraPorrecaSec2.png" 
-      alt="Imagen derecha"
-      class="w-[220px] md:w-[250px] rounded-xl object-cover"
+      alt={t.altImgDer}
+      class="w-[220px] md:w-[250px] rounded-xl object-cover shadow-lg"
     />
 
   </div>

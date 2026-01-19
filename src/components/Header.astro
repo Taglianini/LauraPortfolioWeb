@@ -1,11 +1,28 @@
 ---
 // src/components/Header.astro
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { ui, defaultLang } from '../i18n/ui';
+
+// 1. Obtener idioma actual y textos
+const lang = Astro.currentLocale || defaultLang;
+const t = ui[lang as keyof typeof ui];
+
+// 2. Lógica para el cambio de idioma (Switch)
+const { pathname } = Astro.url;
+
+// Limpiamos la ruta actual para tener la versión "base" (sin /es/)
+// Ejemplo: si viene "/es/sobre-mi", se convierte en "/sobre-mi"
+const pathSinIdioma = pathname.replace(/^\/es/, '') || '/';
+
+// Definimos las dos rutas posibles
+const itPath = pathSinIdioma; // Italiano es la raíz
+const esPath = `/es${pathSinIdioma === '/' ? '' : pathSinIdioma}`; // Español lleva /es
 ---
 
 <header class="w-full bg-primary py-4 px-4 md:px-10 flex items-center justify-center relative z-50">
   <div class="w-full max-w-7xl flex items-center justify-between">
       
-      <a href="/" class="flex items-center z-50">
+      <a href={getRelativeLocaleUrl(lang, '/')} class="flex items-center z-50">
         <img src="/LogoLaura.png" alt="Laura Porreca Logo" class="h-16 md:h-20 w-auto object-contain" />
       </a>
 
@@ -16,38 +33,61 @@
       </button>
 
       <nav class="hidden md:flex items-center space-x-10 text-white font-semibold font-sans">
-        <a href="/" class="hover:text-accent transition-colors duration-300">Inicio</a>
-        <a href="/categorias" class="hover:text-accent transition-colors duration-300">Categorias</a>
-        <a href="/sobre-mi" class="hover:text-accent transition-colors duration-300">Sobre mi</a>
-        <a href="https://wa.me/+393760275469" class="hover:text-accent transition-colors duration-300">Contacto</a>
+        
+        <a href={getRelativeLocaleUrl(lang, '/')} class="hover:text-accent transition-colors duration-300">
+            {t['nav.inicio']}
+        </a>
+        <a href={getRelativeLocaleUrl(lang, 'categorias')} class="hover:text-accent transition-colors duration-300">
+            {t['nav.categorias']}
+        </a>
+        <a href={getRelativeLocaleUrl(lang, 'sobre-mi')} class="hover:text-accent transition-colors duration-300">
+            {t['nav.sobremi']}
+        </a>
+        
+        <a href="https://wa.me/+393760275469" class="hover:text-accent transition-colors duration-300">
+            {t['nav.contacto']}
+        </a>
 
         <div class="relative group cursor-pointer font-normal">
-          <span class="flex items-center gap-1 hover:text-accent transition-colors">
-            IT
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <span class="flex items-center gap-1 hover:text-accent transition-colors uppercase">
+            {lang} <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </span>
+          
           <div class="absolute right-0 top-full pt-2 hidden group-hover:block z-50">
-             <div class="bg-white text-primary rounded-md shadow-lg overflow-hidden flex flex-col">
-                <a href="#" class="px-6 py-2 hover:bg-primary hover:text-white transition-colors">IT</a>
-                <a href="#" class="px-6 py-2 hover:bg-primary hover:text-white transition-colors">ES</a>
+             <div class="bg-white text-primary rounded-md shadow-lg overflow-hidden flex flex-col min-w-80px">
+                <a href={itPath} class={`px-6 py-2 hover:bg-primary hover:text-white transition-colors ${lang === 'it' ? 'font-bold bg-gray-100' : ''}`}>
+                    IT
+                </a>
+                <a href={esPath} class={`px-6 py-2 hover:bg-primary hover:text-white transition-colors ${lang === 'es' ? 'font-bold bg-gray-100' : ''}`}>
+                    ES
+                </a>
              </div>
           </div>
         </div>
+
       </nav>
   </div>
 
   <div id="mobile-menu" class="hidden absolute top-[calc(100%+1rem)] left-1/2 -translate-x-1/2 w-[90%] max-w-sm bg-[#004840] rounded-2xl border border-white/20 shadow-2xl md:hidden flex-col items-center py-6 gap-4 text-white font-semibold font-sans text-lg z-40">
-      <a href="/" class="mobile-link hover:text-accent w-full text-center py-1">Inicio</a>
-      <a href="/categorias" class="mobile-link hover:text-accent w-full text-center py-1">Categorias</a>
-      <a href="/sobre-mi" class="mobile-link hover:text-accent w-full text-center py-1">Sobre mi</a>
-      <a href="https://wa.me/+393760275469" class="mobile-link hover:text-accent w-full text-center py-1">Contacto</a>
+      <a href={getRelativeLocaleUrl(lang, '/')} class="mobile-link hover:text-accent w-full text-center py-1">
+          {t['nav.inicio']}
+      </a>
+      <a href={getRelativeLocaleUrl(lang, 'categorias')} class="mobile-link hover:text-accent w-full text-center py-1">
+          {t['nav.categorias']}
+      </a>
+      <a href={getRelativeLocaleUrl(lang, 'sobre-mi')} class="mobile-link hover:text-accent w-full text-center py-1">
+          {t['nav.sobremi']}
+      </a>
+      <a href="https://wa.me/+393760275469" class="mobile-link hover:text-accent w-full text-center py-1">
+          {t['nav.contacto']}
+      </a>
       
       <div class="flex gap-6 mt-2 pt-4 border-t border-white/20 w-3/4 justify-center text-base">
-        <a href="#" class="hover:text-accent">IT</a>
+        <a href={itPath} class={`hover:text-accent ${lang === 'it' ? 'font-bold text-accent' : ''}`}>IT</a>
         <span class="opacity-50">|</span>
-        <a href="#" class="hover:text-accent">ES</a>
+        <a href={esPath} class={`hover:text-accent ${lang === 'es' ? 'font-bold text-accent' : ''}`}>ES</a>
       </div>
   </div>
 </header>
