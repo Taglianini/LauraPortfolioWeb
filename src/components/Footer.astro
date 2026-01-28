@@ -13,7 +13,8 @@ const catNames = {
     tejidos: 'Tessuti',
     mosaicos: 'Mosaici',
     munecas: 'Bambole',
-    otros: 'Altri'
+    otros: 'Altri',
+    eventos: 'Eventi'
   },
   es: {
     ceramica: 'Cerámica',
@@ -21,7 +22,8 @@ const catNames = {
     tejidos: 'Tejidos',
     mosaicos: 'Mosaicos',
     munecas: 'Muñecas',
-    otros: 'Otros'
+    otros: 'Otros',
+    eventos: 'Eventos'
   }
 };
 
@@ -52,6 +54,7 @@ const cats = catNames[lang as keyof typeof catNames];
           <li><a href={getRelativeLocaleUrl(lang, 'mosaicos')} class="text-white hover:underline">{cats.mosaicos}</a></li>
           <li><a href={getRelativeLocaleUrl(lang, 'munecas')} class="text-white hover:underline">{cats.munecas}</a></li>
           <li><a href={getRelativeLocaleUrl(lang, 'otros')} class="text-white hover:underline">{cats.otros}</a></li>
+          <li><a href={getRelativeLocaleUrl(lang, 'eventos')} class="text-white hover:underline">{cats.eventos}</a></li>
         </ul>
       </div>
 
